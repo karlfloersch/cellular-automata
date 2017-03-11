@@ -1,40 +1,54 @@
 {
-  "name": "ujo-music",
+  "name": "rollup-starter-project",
   "version": "1.0.0",
-  "description": "Ujo Music",
-  "private": true,
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ConsenSys/ujo-music"
-  },
-  "license": "MIT",
+  "description": "Sample project for packages built with rollup.",
+  "main": "dist/rollup-starter-project.js",
+  "module": "dist/rollup-starter-project.mjs",
+  "jsnext:main": "dist/rollup-starter-project.mjs",
   "scripts": {
-    "start": "webpack-dev-server",
-    "clean": "rm -rf dist",
-    "build:prod": "webpack -p",
-    "deploy": "npm run clean && npm run build:prod && surge . ujomusic.com"
+    "start": "concurrently --kill-others \"npm run watch\" \"live-server\"",
+    "prebuild": "eslint lib test",
+    "build": "rollup -c",
+    "watch": "rollup -c -w",
+    "pretest": "npm run build",
+    "test": "mocha",
+    "prepublish": "npm test"
+  },
+  "repository": "rollup/rollup-starter-project",
+  "keywords": [
+    "es6",
+    "modules",
+    "rollup",
+    "bundle",
+    "browser"
+  ],
+  "author": "Brian Donovan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rollup/rollup-starter-project/issues"
+  },
+  "files": [
+    "lib",
+    "dist"
+  ],
+  "homepage": "https://github.com/rollup/rollup-starter-project#readme",
+  "dependencies": {
+    "d3": "^4.7.2"
   },
   "devDependencies": {
-    "babel-core": "^6.14.0",
-    "babel-loader": "^6.2.5",
-    "babel-preset-es2015": "^6.14.0",
-    "brfs": "^1.4.3",
-    "css-loader": "^0.24.0",
-    "file-loader": "^0.9.0",
-    "node-sass": "^3.8.0",
-    "sass-loader": "^4.0.0",
-    "style-loader": "^0.13.1",
-    "surge": "^0.18.0",
-    "transform-loader": "^0.2.3",
-    "webpack": "^1.13.2",
-    "webpack-dev-server": "^1.15.0"
-  },
-  "dependencies": {
-    "babel-loader": "^6.2.8",
+    "babel-eslint": "^7.1.1",
+    "babel-plugin-external-helpers": "^6.18.0",
     "babel-preset-es2015": "^6.18.0",
-    "babel-preset-react": "^6.16.0",
-    "react": "^15.4.0",
-    "touch-velocity": "0.0.3",
-    "zingtouch": "^1.0.3"
+    "babel-register": "^6.18.0",
+    "babelrc-rollup": "^3.0.0",
+    "concurrently": "^3.4.0",
+    "eslint": "^3.12.2",
+    "istanbul": "^0.4.5",
+    "live-server": "^1.2.0",
+    "mocha": "^3.2.0",
+    "rollup": "^0.37.0",
+    "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-istanbul": "^1.1.0",
+    "rollup-watch": "^2.5.0"
   }
 }
